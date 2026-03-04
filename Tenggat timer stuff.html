@@ -1,0 +1,106 @@
+<html>
+<head>
+    <title>Chronos</title>
+    <style>
+        .waltuh{
+            height: 100vh;
+            background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(Mike\ Ehrmenchraut.jpg);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        h1{
+            font-size: 4rem;
+        }
+
+        .timebox{
+            display: flex;
+            gap: 90px;
+        }
+
+        .time{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="waltuh">
+        <h1 id="titleDisplay"></h1>
+        
+        <div class="timebox">
+            <h2 id="theTime"></h2>
+            <div class="time">
+                <h2 id="days">00</h2>
+                <p>Days</p>
+            </div>
+            <div class="time">
+                <h2 id="hours">00</h2>
+                <p>Hours</p>
+            </div>
+            <div class="time">
+                <h2 id="minutes">00</h2>
+                <p>Minutes</p>
+            </div>
+            <div class="time">
+                <h2 id="seconds">00</h2>
+                <p>Seconds</p>
+            </div>
+        </div>
+        <div>
+                <h2 id="locationDisplay"></h2>
+            </div>
+    </div>
+</body>    
+</html>
+<script>
+
+    window.onload = function(){
+  const title = localStorage.getItem("myTitle");
+  const date = localStorage.getItem("countdownDate");
+  const location = localStorage.getItem("myLocation");
+  if(title){
+    document.getElementById("titleDisplay").innerText = title;
+  }
+
+  if(date){
+    document.getElementById("dateDisplay").innerText = "Date: " + date;
+  }
+
+   if(location){
+    document.getElementById("locationDisplay").innerText = location;
+  }
+}
+
+    const Days = document.getElementById('days');
+    const Hours = document.getElementById('hours');
+    const Minutes = document.getElementById('minutes');
+    const Seconds = document.getElementById('seconds');
+    const targetDate = new Date(document.getElementById("theTime").textContent = localStorage.getItem("myDate")).getTime();
+
+    function timer (){
+        const currentDate = new Date().getTime();
+        const distance = targetDate - currentDate;
+        const days= Math.floor(distance/1000/60/60/24);
+        const hours = Math.floor(distance/1000/60/60)%24;
+        const minutes= Math.floor(distance/1000/60)%60;
+        const seconds= Math.floor(distance/1000)%60;
+
+        Days.innerText = days;
+        Hours.innerText = hours;
+        Minutes.innerText = minutes;
+        Seconds.innerText = seconds;
+
+        if(distance < 0) {
+            Days.innerText = "00";
+            Hours.innerText = "00";
+            Minutes.innerText = "00";
+            Seconds.innerText = "00";
+        }
+    }
+setInterval(timer, 1000);
+</script>

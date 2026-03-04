@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Countdown Generator</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:#ffffff;
+  padding:20px;
+}
+.container{
+  background:#fff;
+  padding:20px;
+  max-width:600px;
+  margin:auto;
+}
+h2{
+  background:#000000;
+  color:white;
+  padding:10px;
+}
+input{
+  padding:8px;
+  margin:5px 0 15px 0;
+  width:100%;
+}
+button{
+  background:#7dbd00;
+  color:white;
+  padding:10px;
+  border:none;
+  cursor:pointer;
+}
+.note{
+  font-size:13px;
+  color:#555;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<label><b>Countdown title:</b></label>
+<input type="text" id="title" placeholder="Event Name..." oninput="previewTitle()">
+
+<h2 id="preview">Countdown Timer</h2>
+
+<label><b>Date:</b></label>
+<input type="datetime-local" id="eventDate">
+
+<p class="note">
+Note: Countdown will end at midnight.
+</p>
+
+<label><b>Location of event:</b></label>
+<input type="text" id="location" placeholder="Enter any location">
+
+<button onclick="validateForm()">Create Countdown</button>
+
+</div>
+
+<script>
+function previewTitle(){
+  const title = document.getElementById("title").value;
+  document.getElementById("preview").innerText =
+    title ? title : "Countdown Timer";
+}
+
+function validateForm(){
+
+  const title = document.getElementById("title").value.trim();
+  const date = document.getElementById("eventDate").value;
+  const location = document.getElementById("location").value.trim();
+
+  if(!title){
+    alert("Please enter title!");
+    return;
+  }
+
+  if(!date){
+    alert("Please select date!");
+    return;
+  }
+
+  localStorage.setItem("myTitle", document.getElementById("title").value);
+  localStorage.setItem("myDate", document.getElementById("eventDate").value);
+  localStorage.setItem("myLocation", document.getElementById("location").value);
+   window.location.href = "Tenggat timer stuff.html";
+}
+
+</script>
+
+</body>
+</html>
